@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .weatherCard {
+        
+            text-align: center;
+            border: 1px solid black;
+            margin-top: 20px;
+            width: 20%;
+            height: auto;
+            border-radius: 30px;
+            padding: 10px;
+            background-color: rgb(227, 211, 106);
+        }
+        .weatherCard1{
+            display:inline-block ;
+            height: 50%;
+            width: 20%;
+            border: 1px solid black;
+            margin-top: 30px;
+            border-radius: 30px;
+            padding: 15px;
+            background-color: rgb(227, 211, 106);
+        }
+
+        .weatherCard2{
+            display:inline-block;
+            text-align: center;
+            height: 50%;
+            width: 20%;
+            border: 1px solid black;
+            margin-top: 30px;
+            border-radius: 30px;
+            padding: 15px;
+            background-color: rgb(227, 211, 106);
+        }
+        .weatherCard3{
+            display:inline-block;
+            text-align: center;
+            height: 50%;
+            width: 20%;
+            border: 1px solid black;
+            margin-top: 30px;
+            border-radius: 30px;
+            padding: 15px;
+            background-color: rgb(227, 211, 106);
+        }
+.weatherCard4{
+    display:inline-block;
+            text-align: center;
+            height: 50%;
+            width: 20%;
+            border: 1px solid black;
+            margin-top: 30px;
+            border-radius: 30px;
+            padding: 15px;
+            background-color: rgb(227, 211, 106);
+
+}
+
+
+
+
+        .button{
+            border: 3px solid rgb(214, 202, 129);
+            border-radius: 20px;
+
+        }
+    </style>
+
+</head>
+
+<body style="text-align: center; background-image: url(https://scitechdaily.com/images/Hot-Sun-Thermometer-Heatwave-Concept.jpg); "  >
+    <h1 style="color: rgb(242, 234, 182);"><u>"Zaid's Weather Application"</u></h1>
+
+
+    <form onsubmit="submitFunction(); return false">
+        <h3 style="color: rgb(242, 234, 182);"><u>Enter City Name:</u></h3> <input class="button" type="text" id="cityName" required>
+        <br>
+        <button style="border: 5px solid rgb(197, 197, 224); border-radius: 25px ";>Search</button>
+    </form>
+<center>
+    <div class="weatherCard">
+        <h3 id="upResult"></h3>
+        <h1 id="result"></h1>
+        <h2 id="isresult">Current Weather</h2>
+        <br><p id="leftResult"></p>
+        <p id="rightResult"></p>
+        <span id="downResult"></span>
+    </center>
+
+    </div>
+    <div class="weatherCard1">
+    <h3 id="upEqual"></h3>
+    <h1 id="equal"></h1>
+    <h2 id="isequal"></h2>
+    <br><p id="leftEqual"></p>
+    <p id="rightEqual"></p>
+    <span id="downEqual"></span>
+</div>
+
+
+
+</div>
+<div class="weatherCard2">
+<h3 id="upCal"></h3>
+<h1 id="cal"></h1>
+<h2 id="iscal"></h2>
+<br><p id="leftCal"></p>
+<p id="rightCal"></p>
+<span id="downCal"></span>
+</div>
+
+
+
+</div>
+<div class="weatherCard3">
+<h3 id="upClass"></h3>
+<h1 id="class"></h1>
+<h2 id="isclass"></h2>
+<br><p id="leftClass"></p>
+<p id="rightClass"></p>
+<span id="downClass"></span>
+</div>
+
+
+
+</div>
+<div class="weatherCard4">
+<h3 id="upCode"></h3>
+<h1 id="code"></h1>
+<h2 id="iscode"></h2>
+<br><p id="leftCode"></p>
+<p id="rightCode"></p>
+<span id="downCode"></span>
+</div>
+
+
+
+    <script>
+alert("Welcome To Zaid's Weather App!!")
+        function submitFunction() {
+            let cityName = document.querySelector("#cityName").value
+
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=c0342e5a00f1047c8f804cedd3b0844a&units=metric`)
+                .then(function (response) {
+                    console.log(response.data);
+                   
+                    document.querySelector("#result").innerHTML =
+                        `${response.data.main.temp}°C`;
+                    document.querySelector("#upResult").innerHTML =
+                        response.data.name;
+                    document.querySelector("#leftResult").innerHTML =
+                    ` Feels Like: ${response.data.main.feels_like}°C`;
+                    
+                    document.querySelector("#rightResult").innerHTML =
+                    ` Humidity ${response.data.main.humidity}%`; 
+
+                    document.querySelector("#downResult").innerHTML =
+                        `MIN TEMP
+                         ${response.data.main.temp_min}°C - 
+                         MAX TEMP
+                          ${response.data.main.temp_max}°C `;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+/////////////////////////////////////////////////////
+
+                axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=c0342e5a00f1047c8f804cedd3b0844a&units=metric`)
+
+
+                .then(function (response) {
+                    console.log(response.data);
+                
+                    
+                        document.querySelector("#equal").innerHTML =
+                        `${response.data.list[1].main.temp}°C`
+
+
+                        document.querySelector("#downEqual").innerHTML =
+
+                        `MIN TEMP:
+                         ${response.data.list[1].main.temp_min}°C - 
+                         MAX TEMP:
+                         ${response.data.list[1].main.temp_max}°C `;
+
+
+                        document.querySelector("#leftEqual").innerHTML =
+
+                        `Feels Like:
+                         ${response.data.list[1].main.feels_like}°C `; 
+
+
+                         document.querySelector("#rightEqual").innerHTML =
+
+                         `Humidity:
+                         ${response.data.list[1].main.humidity}°C `; 
+
+
+                         document.querySelector("#upEqual").innerHTML =
+                        response.data.city.name;
+
+
+                        document.querySelector("#isequal").innerHTML =
+                        response.data.list[1].dt_txt;
+                      }
+                    
+
+                )
+                    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=c0342e5a00f1047c8f804cedd3b0844a&units=metric`)
+
+
+                    .then(function (response) {
+                    console.log(response.data);
+                
+
+                        document.querySelector("#cal").innerHTML =
+                        `${response.data.list[2].main.temp}°C`
+
+
+                        document.querySelector("#downCal").innerHTML =
+
+                        `MIN TEMP:
+                         ${response.data.list[2].main.temp_min}°C - 
+                         MAX TEMP:
+                         ${response.data.list[2].main.temp_max}°C `;
+
+
+                        document.querySelector("#leftCal").innerHTML =
+
+                        `Feels Like:
+                         ${response.data.list[2].main.feels_like}°C `; 
+
+
+                         document.querySelector("#rightCal").innerHTML =
+
+                         `Humidity:
+                         ${response.data.list[2].main.humidity}°C `; 
+
+
+                         document.querySelector("#upCal").innerHTML =
+                        response.data.city.name;
+
+
+                        document.querySelector("#iscal").innerHTML =
+                        response.data.list[2].dt_txt;
+                    }
+                    )
+            ///////////////////////////////////////////
+
+
+                    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=c0342e5a00f1047c8f804cedd3b0844a&units=metric`)
+
+
+.then(function (response) {
+console.log(response.data);
+
+
+    document.querySelector("#class").innerHTML =
+    `${response.data.list[3].main.temp}°C`
+
+
+    document.querySelector("#downClass").innerHTML =
+
+    `MIN TEMP:
+     ${response.data.list[3].main.temp_min}°C - 
+     MAX TEMP:
+     ${response.data.list[3].main.temp_max}°C `;
+
+
+    document.querySelector("#leftClass").innerHTML =
+
+    `Feels Like:
+     ${response.data.list[3].main.feels_like}°C `; 
+
+
+     document.querySelector("#rightClass").innerHTML =
+
+     `Humidity:
+     ${response.data.list[3].main.humidity}°C `; 
+
+
+     document.querySelector("#upClass").innerHTML =
+    response.data.city.name;
+
+
+    document.querySelector("#isclass").innerHTML =
+    response.data.list[3].dt_txt;
+
+            })
+
+
+
+            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=c0342e5a00f1047c8f804cedd3b0844a&units=metric`)
+
+
+.then(function (response) {
+console.log(response.data);
+
+    document.querySelector("#code").innerHTML =
+    `${response.data.list[4].main.temp}°C`
+
+
+    document.querySelector("#downCode").innerHTML =
+
+    `MIN TEMP:
+     ${response.data.list[4].main.temp_min}°C - 
+     MAX TEMP:
+     ${response.data.list[4].main.temp_max}°C `;
+
+
+    document.querySelector("#leftCode").innerHTML =
+
+    `Feels Like:
+     ${response.data.list[4].main.feels_like}°C `; 
+
+
+     document.querySelector("#rightCode").innerHTML =
+
+     `Humidity:
+     ${response.data.list[4].main.humidity}°C `; 
+
+
+     document.querySelector("#upCode").innerHTML =
+    response.data.city.name;
+
+
+    document.querySelector("#iscode").innerHTML =
+    response.data.list[4].dt_txt;
+
+})
+
+
+        
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+            }    
+
+        
+    </script>
+</body>
+
+</html>
